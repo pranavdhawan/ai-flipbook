@@ -1,5 +1,5 @@
 import HomeUI from "./components/HomeUI";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { BookExcerpt } from "@prisma/client";
 
 export const revalidate = 0
