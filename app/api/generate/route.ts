@@ -24,16 +24,18 @@ export async function POST(request: Request) {
                 responseModalities: ['Text', 'Image']
             },
         });
-        for (const part of response.candidates[0].content.parts) {
-            // Based on the part type, either show the text or save the image
-            if (part.inlineData) {
-                const imageData = part.inlineData.data;
-                return NextResponse.json({
-                    image: `data:image/png;base64,${imageData}`
-                });
+        if (response?.candidates?.[0]?.content?.parts) {
+            for (const part of response.candidates[0].content.parts) {
+                // Based on the part type, either show the text or save the image
+                if (part.inlineData) {
+                    const imageData = part.inlineData.data;
+                    return NextResponse.json({
+                        image: `data:image/png;base64,${imageData}`
+                    });
+                }
             }
+            return NextResponse.json({ error: 'No image generated' }, { status: 400 });
         }
-        return NextResponse.json({ error: 'No image generated' }, { status: 400 });
     } catch (error) {
         console.error("Error generating content:", error);
         return NextResponse.json({ error: 'Failed to generate image' }, { status: 500 });
