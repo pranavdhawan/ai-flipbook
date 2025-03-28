@@ -11,8 +11,12 @@ interface BookExcerpt {
     author: string;
 }
 
+interface HomeUIProps {
+    data: BookExcerpt[];
+}
 
-export default function HomeUI({ data }: { data: BookExcerpt[] }) {
+
+export default function HomeUI({ data }: HomeUIProps) {
     const [para, setPara] = useState(0)
     const [generatedImage, setGeneratedImage] = useState<string | null>(null)
     const [subtitle, setSubtitle] = useState("Imagine what the author is trying to picture..\n (Kindly wait for a few seconds for the image to generate)")
