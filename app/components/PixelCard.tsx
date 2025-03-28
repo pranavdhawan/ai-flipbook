@@ -176,7 +176,7 @@ export default function PixelCard({
     noFocus,
     className = "",
     children
-}: PixelCardProps): JSX.Element {
+}: PixelCardProps): React.ReactElement {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -267,7 +267,9 @@ export default function PixelCard({
     };
 
     const handleAnimation = (name: keyof Pixel) => {
-        cancelAnimationFrame(animationRef.current);
+        if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+        }
         animationRef.current = requestAnimationFrame(() => doAnimate(name));
     };
 
@@ -292,7 +294,9 @@ export default function PixelCard({
         }
         return () => {
             observer.disconnect();
-            cancelAnimationFrame(animationRef.current);
+            if (animationRef.current !== null) {
+                cancelAnimationFrame(animationRef.current);
+            }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [finalGap, finalSpeed, finalColors, finalNoFocus]);
