@@ -1,0 +1,25 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model BookExcerpt {
+    id        String   @id @default(cuid())
+    title     String
+    author    String
+    excerpt   String
+    // images    ExcerptImage[]
+    createdAt DateTime @default(now())
+}
+
+// model ExcerptImage {
+//     id        String      @id @default(cuid())
+//     exceprtId String      @unique
+//     imgUrl    String
+//     excerpt   BookExcerpt @relation(fields: [exceprtId], references: [id])
+//     createdAt DateTime    @default(now())
+// }
