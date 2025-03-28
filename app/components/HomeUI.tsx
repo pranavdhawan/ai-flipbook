@@ -5,8 +5,14 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import FadeContent from './FadeContent'
 
+interface BookExcerpt {
+    excerpt: string;
+    title: string;
+    author: string;
+}
 
-export default function HomeUI({ data }: { data: any[] }) {
+
+export default function HomeUI({ data }: { data: BookExcerpt[] }) {
     const [para, setPara] = useState(0)
     const [generatedImage, setGeneratedImage] = useState<string | null>(null)
     const [subtitle, setSubtitle] = useState("Imagine what the author is trying to picture..\n (Kindly wait for a few seconds for the image to generate)")
